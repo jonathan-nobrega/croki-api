@@ -18,7 +18,7 @@ public class ClientJPA {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    private boolean is_active;
+    private boolean is_active = true;
     private String name;
     private String company;
     private String email;

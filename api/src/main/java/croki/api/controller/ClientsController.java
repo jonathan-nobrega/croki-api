@@ -4,6 +4,7 @@ import croki.api.clients.ClientDTO;
 import croki.api.clients.ClientJPA;
 import croki.api.clients.ClientRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class ClientsController {
 
     @PostMapping
     @Transactional
-    public void create(@RequestBody ClientDTO data) {
+    public void create(@RequestBody @Valid ClientDTO data) {
         System.out.println(data);
         repository.save(new ClientJPA(data));
 
