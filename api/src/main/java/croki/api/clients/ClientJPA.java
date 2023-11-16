@@ -27,7 +27,7 @@ public class ClientJPA {
     @Embedded
     private AddressJPA address;
 
-    public ClientJPA(ClientDTO data) {
+    public ClientJPA(CreateClientDTO data) {
         this.is_active = data.is_active();
         this.name = data.name();
         this.company = data.company();
