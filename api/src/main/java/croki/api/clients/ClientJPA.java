@@ -15,10 +15,11 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 public class ClientJPA {
 
-    @Id @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    private boolean is_active = true;
+    private boolean is_active;
     private String name;
     private String company;
     private String email;
@@ -28,11 +29,20 @@ public class ClientJPA {
     private AddressJPA address;
 
     public ClientJPA(CreateClientDTO data) {
-        this.is_active = data.is_active();
         this.name = data.name();
+        this.is_active = true;
         this.company = data.company();
         this.email = data.email();
         this.phone = data.phone();
         this.address = new AddressJPA(data.address());
+    }
+
+    public void updateData(UpdateClientDTO data) {
+        if (data.name() != null) this.name = data.name();
+        this.is_active = data.is_active();
+        if (data.company() != null) this.company = data.company();
+        if (data.email() != null) this.email = data.email();
+        if (data.phone() != null) this.phone = data.phone();
+        if (data.address() != null) this.address.updateData(data.address());
     }
 }

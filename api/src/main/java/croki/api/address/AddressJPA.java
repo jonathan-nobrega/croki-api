@@ -25,4 +25,12 @@ public class AddressJPA {
         this.state = data.state();
         this.zip = data.zip();
     }
+
+    public void updateData(AddressDTO address) {
+        if (address.line_1() != null) this.line_1 = address.line_1();
+        if (address.line_2() != null) this.line_2 = address.line_2();
+        if (address.zip() <= 0) this.zip = address.zip();
+        if (address.city() != null) this.city = address.city();
+        if (address.state() != null) this.state = address.state();
+    }
 }

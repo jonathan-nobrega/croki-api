@@ -1,6 +1,7 @@
 package croki.api.clients;
 
 public record ListClientDTO(
+        int id,
         boolean is_active,
         String name,
         String company,
@@ -10,6 +11,7 @@ public record ListClientDTO(
 ) {
         public ListClientDTO(ClientJPA client) {
                 this(
+                        client.getId(),
                         client.is_active(),
                         client.getName(),
                         client.getCompany(),

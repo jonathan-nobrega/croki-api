@@ -1,7 +1,7 @@
 create table clients(
 
-    is_active boolean NOT NULL,
-    id VARCHAR(36) NOT NULL,
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    is_active BOOLEAN NOT NULL,
     name VARCHAR(100) NOT NULL,
     company VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
