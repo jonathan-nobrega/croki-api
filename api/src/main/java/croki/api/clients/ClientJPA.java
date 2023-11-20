@@ -17,7 +17,7 @@ public class ClientJPA {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private boolean is_active;
     private String name;
