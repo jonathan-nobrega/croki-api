@@ -1,6 +1,6 @@
-package croki.api.clients;
+package croki.api.domain.clients;
 
-import croki.api.address.AddressDTO;
+import croki.api.domain.address.AddressDTO;
 import jakarta.validation.constraints.NotNull;
 
 public record UpdateClientDTO(
@@ -12,7 +12,7 @@ public record UpdateClientDTO(
         String email,
         String phone,
         AddressDTO address
-        ) {
+) {
 }
 
 

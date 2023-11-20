@@ -1,4 +1,4 @@
-package croki.api.clients;
+package croki.api.domain.clients;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

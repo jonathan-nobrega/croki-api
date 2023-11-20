@@ -1,6 +1,6 @@
-package croki.api.clients;
+package croki.api.domain.clients;
 
-import croki.api.address.AddressDTO;
+import croki.api.domain.address.AddressDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

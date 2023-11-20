@@ -1,6 +1,6 @@
-package croki.api.clients;
+package croki.api.domain.clients;
 
-import croki.api.address.AddressJPA;
+import croki.api.domain.address.AddressJPA;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

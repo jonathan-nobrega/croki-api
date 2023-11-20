@@ -1,6 +1,9 @@
-package croki.api.address;
+package croki.api.domain.address;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 public record AddressDTO(
         @NotBlank

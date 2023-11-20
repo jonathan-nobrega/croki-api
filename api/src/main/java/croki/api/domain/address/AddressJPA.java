@@ -1,4 +1,4 @@
-package croki.api.address;
+package croki.api.domain.address;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,6 @@
-package croki.api.clients;
+package croki.api.domain.clients;
+
+import croki.api.domain.address.AddressJPA;
 
 public record ClientDetailingDTO(
         Long id,
@@ -7,7 +9,7 @@ public record ClientDetailingDTO(
         String company,
         String email,
         String phone,
-        croki.api.address.AddressJPA address
+        AddressJPA address
 ) {
     public ClientDetailingDTO(ClientJPA client) {
         this(

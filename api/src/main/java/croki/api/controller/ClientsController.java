@@ -1,6 +1,6 @@
 package croki.api.controller;
 
-import croki.api.clients.*;
+import croki.api.domain.clients.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
