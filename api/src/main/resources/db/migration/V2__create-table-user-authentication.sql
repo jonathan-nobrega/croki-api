@@ -5,3 +5,11 @@ CREATE TABLE users(
 
     PRIMARY KEY(id)
 );
+
+INSERT INTO users(id, login, password) VALUES(
+    1,
+    'asd@asd.com',
+    '$2a$10$AvSNvQy0Te/GyODXe4x4FeI93bNCGEx7PuYJN/XfXi6UGl1VeHRry'
+);
+
+

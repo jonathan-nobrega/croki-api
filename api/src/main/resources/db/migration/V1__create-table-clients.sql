@@ -14,3 +14,19 @@ create table clients(
 
     primary key(id)
 );
+
+INSERT INTO clients(
+    id, is_active, name, company, email, phone, line_1, line_2, city, state, zip
+) VALUES(
+    1,
+    true,
+    "John Due",
+    "Ghost Company",
+    "john@ghost.com",
+    "+1 919-123-1234",
+    "Address line one example",
+    "Address line two example",
+    "Raleigh",
+    "NC",
+    "25555"
+);
