@@ -7,20 +7,14 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public record CreateProjectDTO(
-        Long id,
-
         @NotNull
         Long clientId,
-
         @NotNull
         String title,
-
         @NotNull
         BillingMethod billingMethod,
-
         @NotNull
         Boolean isActive,
-
         @Future
         @JsonFormat
         LocalDateTime deadline

@@ -27,8 +27,6 @@ public class ClientsController {
         repository.save(newClient);
 
         var uri = uriBuilder.path("/clients/{id}").buildAndExpand(newClient.getId()).toUri();
-        System.out.println(uri);
-
         return ResponseEntity.created(uri).body(new ClientDetailingDTO(newClient));
     }
 

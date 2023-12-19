@@ -5,11 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ProjectRepository extends JpaRepository<ProjectJPA, Long> {
 
     //@Query("""
-//            SELECT * FROM projects p
-//            WHERE
-//            p.clientId = :clientId
-//            ORDER BY RAND()
-//            LIMIT 1
-//            """)
+    //        SELECT p FROM ProjectJPA p
+    //        WHERE
+    //        p.ClientJPA.id = :clientId
+    //        order by rand()
+    //        limit 1
+    //        """)
     //ProjectJPA chooseRandomProjectFromClient(Long clientId);
 }

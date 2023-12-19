@@ -13,7 +13,7 @@ public class EntitiesValidation implements ProjectValidations {
 
     public void validate(CreateProjectDTO data) {
 
-        var client = clientRepository.existsById(data.id());
+        var client = clientRepository.existsById(data.clientId());
 
         if (!client) {
             throw new RuntimeException("Client doesn't exist.");

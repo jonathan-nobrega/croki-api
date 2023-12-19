@@ -30,4 +30,12 @@ public class ProjectJPA {
     @JoinColumn(name = "client_id")
     private ClientJPA client;
 
+    public ProjectJPA(CreateProjectDTO data, ClientJPA client) {
+        this.client = client;
+        this.title = data.title();
+        this.billingMethod = data.billingMethod();
+        this.isActive = data.isActive();
+        this.deadline = data.deadline();
+    }
+
 }

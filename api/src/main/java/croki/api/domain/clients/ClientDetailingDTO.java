@@ -4,7 +4,7 @@ import croki.api.domain.address.AddressJPA;
 
 public record ClientDetailingDTO(
         Long id,
-        boolean is_active,
+        Boolean isActive,
         String name,
         String company,
         String email,
