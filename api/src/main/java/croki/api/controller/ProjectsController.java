@@ -20,7 +20,7 @@ public class ProjectsController {
     @PostMapping
     @Transactional
     public ResponseEntity<Object> create(@RequestBody @Valid CreateProjectDTO data, UriComponentsBuilder uriBuilder) {
-        System.out.println(data);
+
         return ResponseEntity.ok(new CreateProjectDTO(
                         null,
                         null,

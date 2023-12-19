@@ -14,7 +14,7 @@ public record ClientDetailingDTO(
     public ClientDetailingDTO(ClientJPA client) {
         this(
                 client.getId(),
-                client.is_active(),
+                client.isActive(),
                 client.getName(),
                 client.getCompany(),
                 client.getEmail(),

@@ -19,7 +19,7 @@ public class ClientJPA {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private boolean is_active;
+    private boolean isActive;
     private String name;
     private String company;
     private String email;
@@ -30,7 +30,7 @@ public class ClientJPA {
 
     public ClientJPA(CreateClientDTO data) {
         this.name = data.name();
-        this.is_active = true;
+        this.isActive = true;
         this.company = data.company();
         this.email = data.email();
         this.phone = data.phone();
@@ -39,7 +39,7 @@ public class ClientJPA {
 
     public void updateData(UpdateClientDTO data) {
         if (data.name() != null) this.name = data.name();
-        this.is_active = data.is_active();
+        this.isActive = data.is_active();
         if (data.company() != null) this.company = data.company();
         if (data.email() != null) this.email = data.email();
         if (data.phone() != null) this.phone = data.phone();

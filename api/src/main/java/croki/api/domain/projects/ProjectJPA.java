@@ -23,18 +23,11 @@ public class ProjectJPA {
 
     private String title;
     private BillingMethod billingMethod;
-    private Boolean isActive;
+    private boolean isActive;
     private LocalDateTime deadline;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private ClientJPA client;
 
-    // public ProjectJPA(CreateProjectDTO data) {
-//         this.title = data.title();
-//         this.billingMethod = data.billingMethod();
-//         this.isActive = data.isActive();
-//         this.client = data.clientId();
-    // this.deadline = data.deadline();
-    // }
 }

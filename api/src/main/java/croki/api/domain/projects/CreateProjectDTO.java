@@ -21,7 +21,6 @@ public record CreateProjectDTO(
         @NotNull
         Boolean isActive,
 
-        @NotNull
         @Future
         @JsonFormat
         LocalDateTime deadline
