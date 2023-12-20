@@ -1,7 +1,7 @@
 package croki.api.domain.projects.validations;
 
 import croki.api.domain.clients.ClientRepository;
-import croki.api.domain.projects.CreateProjectDTO;
+import croki.api.domain.projects.dto.CreateProjectDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

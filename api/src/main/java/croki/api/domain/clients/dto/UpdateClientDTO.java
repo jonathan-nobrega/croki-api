@@ -1,4 +1,4 @@
-package croki.api.domain.clients;
+package croki.api.domain.clients.dto;
 
 import croki.api.domain.address.AddressDTO;
 import jakarta.validation.constraints.NotNull;

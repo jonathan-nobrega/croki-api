@@ -1,11 +1,16 @@
 package croki.api.domain.clients;
 
 import croki.api.domain.address.AddressJPA;
+import croki.api.domain.clients.dto.CreateClientDTO;
+import croki.api.domain.clients.dto.UpdateClientDTO;
+import croki.api.domain.projects.Project;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Table(name = "clients")
 @Entity(name = "client")
@@ -13,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class ClientJPA {
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +33,10 @@ public class ClientJPA {
     @Embedded
     private AddressJPA address;
 
-    public ClientJPA(CreateClientDTO data) {
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Project> projects;
+
+    public Client(CreateClientDTO data) {
         this.name = data.name();
         this.isActive = true;
         this.company = data.company();

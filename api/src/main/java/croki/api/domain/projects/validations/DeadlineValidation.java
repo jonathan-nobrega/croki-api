@@ -1,6 +1,6 @@
 package croki.api.domain.projects.validations;
 
-import croki.api.domain.projects.CreateProjectDTO;
+import croki.api.domain.projects.dto.CreateProjectDTO;
 import org.springframework.stereotype.Component;
 
 @Component

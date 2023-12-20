@@ -1,6 +1,7 @@
 package croki.api.domain.projects;
 
-import croki.api.domain.clients.ClientJPA;
+import croki.api.domain.clients.Client;
+import croki.api.domain.projects.dto.CreateProjectDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -15,27 +16,29 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class ProjectJPA {
+public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
+
+    @Column(name = "billing_method")
+    @Enumerated(EnumType.STRING)
     private BillingMethod billingMethod;
     private boolean isActive;
     private LocalDateTime deadline;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
-    private ClientJPA client;
+    private Client client;
 
-    public ProjectJPA(CreateProjectDTO data, ClientJPA client) {
+    public Project(CreateProjectDTO data, Client client) {
         this.client = client;
         this.title = data.title();
         this.billingMethod = data.billingMethod();
         this.isActive = data.isActive();
         this.deadline = data.deadline();
     }
-
 }

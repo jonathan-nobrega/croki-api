@@ -1,6 +1,6 @@
-package croki.api.domain.projects;
+package croki.api.domain.projects.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import croki.api.domain.projects.BillingMethod;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 
@@ -16,7 +16,6 @@ public record CreateProjectDTO(
         @NotNull
         Boolean isActive,
         @Future
-        @JsonFormat
         LocalDateTime deadline
 ) {
 }

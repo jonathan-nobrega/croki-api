@@ -1,6 +1,10 @@
 package croki.api.controller;
 
-import croki.api.domain.clients.*;
+import croki.api.domain.clients.Client;
+import croki.api.domain.clients.ClientRepository;
+import croki.api.domain.clients.dto.ClientDetailingDTO;
+import croki.api.domain.clients.dto.CreateClientDTO;
+import croki.api.domain.clients.dto.UpdateClientDTO;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -23,7 +27,7 @@ public class ClientsController {
     @PostMapping
     @Transactional
     public ResponseEntity<ClientDetailingDTO> create(@RequestBody @Valid CreateClientDTO data, UriComponentsBuilder uriBuilder) {
-        var newClient = new ClientJPA(data);
+        var newClient = new Client(data);
         repository.save(newClient);
 
         var uri = uriBuilder.path("/clients/{id}").buildAndExpand(newClient.getId()).toUri();
