@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 public record CreateClientDTO(
-        boolean is_active,
+        boolean isActive,
         @NotBlank
         String name,
         @NotBlank

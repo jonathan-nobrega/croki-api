@@ -31,7 +31,7 @@ public class ProjectsController {
     @Transactional
     public ResponseEntity<ProjectDetailingDTO> create(@RequestBody @Valid CreateProjectDTO data, UriComponentsBuilder uriBuilder) {
         var client = clientRepository.getReferenceById(data.clientId());
-        var newProject = new Project(data, client);
+        var newProject = new Project(client, data);
 
         //projectRepository.save(newProject);
 

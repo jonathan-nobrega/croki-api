@@ -34,11 +34,14 @@ public class Project {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    public Project(CreateProjectDTO data, Client client) {
+    public Project(Client client, CreateProjectDTO data) {
         this.client = client;
         this.title = data.title();
         this.billingMethod = data.billingMethod();
         this.isActive = data.isActive();
         this.deadline = data.deadline();
+    }
+
+    public Project(CreateProjectDTO projectDto) {
     }
 }
