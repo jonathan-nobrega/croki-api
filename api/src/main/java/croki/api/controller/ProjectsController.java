@@ -33,7 +33,7 @@ public class ProjectsController {
         var client = clientRepository.getReferenceById(data.clientId());
         var newProject = new Project(client, data);
 
-        //projectRepository.save(newProject);
+        projectRepository.save(newProject);
 
         var uri = uriBuilder.path("/projects/{id}").buildAndExpand(newProject.getId()).toUri();
         return ResponseEntity.created(uri).body(new ProjectDetailingDTO(newProject));
