@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: croki.api.controller.ClientsControllerTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.84 s - in croki.api.controller.ClientsControllerTest

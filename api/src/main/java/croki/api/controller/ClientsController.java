@@ -36,7 +36,7 @@ public class ClientsController {
 
     @GetMapping
     public ResponseEntity<Page<ClientDetailingDTO>> findAll(
-            @PageableDefault(size = 20, sort = {"name"})
+            @PageableDefault(size = 20, sort = {"id"})
             Pageable page
     ) {
         var result = repository.findAll(page).map(ClientDetailingDTO::new);
