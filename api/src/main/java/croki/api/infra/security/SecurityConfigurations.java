@@ -24,7 +24,8 @@ public class SecurityConfigurations {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf(AbstractHttpConfigurer::disable)
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.POST, "/login").permitAll();
@@ -32,6 +33,8 @@ public class SecurityConfigurations {
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                // Trying to implement customized error handling for wrong email throwing status 500 instead of 401
+                //.exceptionHandling((exception) -> exception.authenticationEntryPoint(new CustomAuthFailureHandler))
                 .build();
     }
 
