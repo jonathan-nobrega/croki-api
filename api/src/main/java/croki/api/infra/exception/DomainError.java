@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class DomainError {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<Void> notFound() {
+    public ResponseEntity<Void> notFound(Exception ex) {
+        var status = HttpStatus.NOT_FOUND;
+        var error = new RestErrorDTO(status, ex.getLocalizedMessage());
+
         return ResponseEntity.notFound().build();
     }
 
