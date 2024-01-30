@@ -2,6 +2,7 @@ package croki.api.domain.projects;
 
 import croki.api.domain.clients.Client;
 import croki.api.domain.projects.dto.CreateProjectDTO;
+import croki.api.domain.projects.dto.UpdateProjectDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -42,6 +43,11 @@ public class Project {
         this.deadline = data.deadline();
     }
 
-    public Project(CreateProjectDTO projectDto) {
+    public void updateProject(Client client, UpdateProjectDTO data) {
+        if (client != null) this.client = client;
+        if (data.title() != null) this.title = data.title();
+        if (data.billingMethod() != null) this.billingMethod = data.billingMethod();
+        if (data.isActive() != null) this.isActive = data.isActive();
+        if (data.deadline() != null) this.deadline = data.deadline();
     }
 }

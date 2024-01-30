@@ -13,4 +13,5 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
             LIMIT 1
             """)
     Project chooseRandomProjectFromClient(@Param("clientId") Long clientId);
+
 }

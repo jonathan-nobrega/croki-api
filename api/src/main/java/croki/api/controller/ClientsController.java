@@ -53,7 +53,7 @@ public class ClientsController {
     @PutMapping
     @Transactional
     public ResponseEntity<ClientDetailingDTO> update(@RequestBody @Valid UpdateClientDTO data) {
-        var client = repository.getReferenceById((data.id()));
+        var client = repository.getReferenceById(data.id());
         client.updateData(data);
         return ResponseEntity.ok(new ClientDetailingDTO(client));
     }

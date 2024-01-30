@@ -1,10 +1,10 @@
 package croki.api.controller;
 
-import croki.api.domain.clients.ClientRepository;
-import croki.api.domain.projects.Project;
 import croki.api.domain.projects.ProjectRepository;
 import croki.api.domain.projects.dto.CreateProjectDTO;
 import croki.api.domain.projects.dto.ProjectDetailingDTO;
+import croki.api.domain.projects.dto.UpdateProjectDTO;
+import croki.api.domain.projects.services.ProjectService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -25,22 +25,10 @@ public class ProjectsController {
     private ProjectRepository projectRepository;
 
     @Autowired
-    private ClientRepository clientRepository;
-
-    @PostMapping
-    @Transactional
-    public ResponseEntity<ProjectDetailingDTO> create(@RequestBody @Valid CreateProjectDTO data, UriComponentsBuilder uriBuilder) {
-        var client = clientRepository.getReferenceById(data.clientId());
-        var newProject = new Project(client, data);
-
-        projectRepository.save(newProject);
-
-        var uri = uriBuilder.path("/projects/{id}").buildAndExpand(newProject.getId()).toUri();
-        return ResponseEntity.created(uri).body(new ProjectDetailingDTO(newProject));
-    }
+    private ProjectService projectService;
 
     @GetMapping
-    public ResponseEntity<Page<ProjectDetailingDTO>> findAll(
+    public ResponseEntity<Page<ProjectDetailingDTO>> findList(
             @PageableDefault(size = 20, sort = {"title"})
             Pageable page
     ) {
@@ -48,14 +36,42 @@ public class ProjectsController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ProjectDetailingDTO> findOne(@PathVariable Long id) {
+        var project = projectRepository.getReferenceById(id);
+        return ResponseEntity.ok().body(new ProjectDetailingDTO(project));
+    }
+
     @GetMapping("/perClient/{id}")
     public ResponseEntity<ProjectDetailingDTO> pickFromClient(@PathVariable Long id) {
-        System.out.println("aqui esta: " + id);
         var project = projectRepository.chooseRandomProjectFromClient(id);
-        System.out.println("aquiiiiiiiiiiiiiiiiiiii");
-        System.out.println(project.toString());
         return ResponseEntity.ok(new ProjectDetailingDTO(project));
     }
 
+    @PostMapping
+    @Transactional
+    public ResponseEntity<ProjectDetailingDTO> create(@RequestBody @Valid CreateProjectDTO data, UriComponentsBuilder uriBuilder) {
+        var newProject = projectService.create(data);
+        var uri = uriBuilder.path("/projects/{id}").buildAndExpand(newProject.id()).toUri();
 
+        return ResponseEntity.created(uri).body(newProject);
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity<ProjectDetailingDTO> update(@RequestBody @Valid UpdateProjectDTO data) {
+        var project = projectService.update(data);
+        return ResponseEntity.ok(project);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<ResponseEntity.BodyBuilder> delete(@PathVariable Long id) {
+        projectService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
+
+
+
+

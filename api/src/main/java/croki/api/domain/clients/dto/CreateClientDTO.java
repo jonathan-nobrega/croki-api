@@ -10,7 +10,6 @@ public record CreateClientDTO(
         boolean isActive,
         @NotBlank
         String name,
-        @NotBlank
         String company,
         @NotBlank @Email
         String email,

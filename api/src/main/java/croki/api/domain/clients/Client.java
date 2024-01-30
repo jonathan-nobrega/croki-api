@@ -1,6 +1,5 @@
 package croki.api.domain.clients;
 
-import croki.api.domain.address.AddressDTO;
 import croki.api.domain.address.AddressJPA;
 import croki.api.domain.clients.dto.CreateClientDTO;
 import croki.api.domain.clients.dto.UpdateClientDTO;
@@ -44,9 +43,6 @@ public class Client {
         this.email = data.email();
         this.phone = data.phone();
         this.address = new AddressJPA(data.address());
-    }
-
-    public Client(boolean b, String randomClientName, String randomCompanyName, String mail, String s, AddressDTO addressDTO) {
     }
 
     public void updateData(UpdateClientDTO data) {

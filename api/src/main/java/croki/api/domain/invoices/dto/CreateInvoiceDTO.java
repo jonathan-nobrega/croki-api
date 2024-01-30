@@ -1,7 +1,5 @@
 package croki.api.domain.invoices.dto;
 
-import croki.api.domain.invoices.InvoiceStatus;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
