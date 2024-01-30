@@ -1,18 +1,20 @@
 package croki.api.controller;
 
-import croki.api.domain.clients.ClientRepository;
 import croki.api.domain.invoices.InvoiceRepository;
+import croki.api.domain.invoices.dto.CreateInvoiceDTO;
 import croki.api.domain.invoices.dto.InvoiceDetailingDTO;
-import croki.api.domain.projects.ProjectRepository;
+import croki.api.domain.invoices.dto.UpdateInvoiceDTO;
+import croki.api.domain.invoices.services.InvoiceService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("invoices")
@@ -20,25 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class InvoicesController {
 
     @Autowired
-    private ClientRepository clientRepository;
-
-    @Autowired
-    private ProjectRepository projectRepository;
-
-    @Autowired
     private InvoiceRepository invoiceRepository;
 
-    //@PostMapping
-    //@Transactional
-    //public ResponseEntity<Object> create(
-    //        @RequestBody @Valid CreateInvoiceDTO data, UriComponentsBuilder uriBuilder
-    //) {
-    //    var client = clientRepository.getReferenceById(data.clientId());
-    //    var project = projectRepository.getReferenceById(data.projectId());
-    //    System.out.println("client: " + client);
-    //    System.out.println(project);
-    //    return ResponseEntity.ok().build();
-    //}
+    @Autowired
+    private InvoiceService invoiceService;
 
     @GetMapping
     public ResponseEntity<Page<InvoiceDetailingDTO>> findAll(
@@ -48,4 +35,36 @@ public class InvoicesController {
         var result = invoiceRepository.findAll(page).map(InvoiceDetailingDTO::new);
         return ResponseEntity.ok(result);
     }
+
+    @GetMapping
+    @RequestMapping("/{id}")
+    public ResponseEntity<InvoiceDetailingDTO> findOne(@PathVariable long id) {
+        var invoice = invoiceRepository.getReferenceById(id);
+        return ResponseEntity.ok(new InvoiceDetailingDTO(invoice));
+    }
+
+    @PostMapping
+    @Transactional
+    public ResponseEntity<InvoiceDetailingDTO> create(@RequestBody @Valid CreateInvoiceDTO data, UriComponentsBuilder uriBuilder) {
+        var newInvoice = invoiceService.create(data);
+        var uri = uriBuilder.path("/invoices/{id}").buildAndExpand(newInvoice.id()).toUri();
+
+        return ResponseEntity.created(uri).body(newInvoice);
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity<InvoiceDetailingDTO> update(@RequestBody @Valid UpdateInvoiceDTO data) {
+        var invoice = invoiceService.update(data);
+        return ResponseEntity.ok(invoice);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<ResponseEntity.BodyBuilder> delete(@PathVariable Long id) {
+        invoiceService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

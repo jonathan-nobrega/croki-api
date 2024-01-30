@@ -1,7 +1,8 @@
 package croki.api.domain.invoices;
 
-import croki.api.domain.clients.Client;
 import croki.api.domain.invoices.dto.CreateInvoiceDTO;
+import croki.api.domain.invoices.dto.InvoiceStatus;
+import croki.api.domain.invoices.dto.UpdateInvoiceDTO;
 import croki.api.domain.projects.Project;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,15 +24,6 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id")
-    private Client client;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id")
-    private Project project;
-
     private Long invoiceNumber;
     private String description;
     private BigDecimal amount;
@@ -41,8 +33,11 @@ public class Invoice {
     @Enumerated(EnumType.STRING)
     private InvoiceStatus status;
 
-    public Invoice(Client client, Project project, CreateInvoiceDTO data) {
-        this.client = client;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private Project project;
+
+    public Invoice(Project project, CreateInvoiceDTO data) {
         this.project = project;
         this.invoiceNumber = data.invoiceNumber();
         this.description = data.description();
@@ -51,7 +46,23 @@ public class Invoice {
         this.status = data.status();
     }
 
-    public Invoice(CreateInvoiceDTO invoiceDto) {
-
+    public void updateInvoice(Project project, UpdateInvoiceDTO data) {
+        if (project != null) this.project = project;
+        if (data.invoiceNumber() != null) this.invoiceNumber = data.invoiceNumber();
+        if (data.description() != null) this.description = data.description();
+        if (data.amount() != null) this.amount = data.amount();
+        if (data.dueDate() != null) this.dueDate = data.dueDate();
+        if (data.status() != null) this.status = data.status();
     }
+
+    //public void updateData(UpdateInvoiceDTO data) {
+    //    if (data.projectId() != null) {
+    //        this.project.updateData(data.projectId());
+    //    }
+    //    if (data. != null) this. = data.getInvoiceNumber();
+    //    if (data. != null) this. = data.getDescription();
+    //    if (data. != null) this. = data.getAmount();
+    //    if (data. != null) this. = data.getDueDate();
+    //    if (data. != null) this. = data.getStatus();
+    //}
 }

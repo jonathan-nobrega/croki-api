@@ -1,4 +1,4 @@
-package croki.api.domain.invoices;
+package croki.api.domain.invoices.dto;
 
 public enum InvoiceStatus {
     PENDING,

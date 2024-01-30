@@ -24,12 +24,12 @@ public class Project {
     private Long id;
 
     private String title;
+    private boolean isActive;
+    private LocalDateTime deadline;
 
     @Column(name = "billing_method")
     @Enumerated(EnumType.STRING)
     private BillingMethod billingMethod;
-    private boolean isActive;
-    private LocalDateTime deadline;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")

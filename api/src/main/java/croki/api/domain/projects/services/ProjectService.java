@@ -26,8 +26,8 @@ public class ProjectService {
     public ProjectDetailingDTO create(CreateProjectDTO data) {
         var client = checkClient(data.clientId());
         var newProject = new Project(client, data);
-        projectRepository.save(newProject);
 
+        projectRepository.save(newProject);
         return new ProjectDetailingDTO(newProject);
     }
 
@@ -35,8 +35,8 @@ public class ProjectService {
     public ProjectDetailingDTO update(UpdateProjectDTO data) {
         var client = checkClient(data.clientId());
         var project = projectRepository.getReferenceById(data.id());
-        project.updateProject(client, data);
 
+        project.updateProject(client, data);
         return new ProjectDetailingDTO(project);
     }
 

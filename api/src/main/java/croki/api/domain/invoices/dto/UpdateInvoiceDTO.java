@@ -5,8 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public record CreateInvoiceDTO(
+public record UpdateInvoiceDTO(
         @NotNull
+        Long id,
         Long projectId,
         Long invoiceNumber,
         String description,
