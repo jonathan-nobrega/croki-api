@@ -1,6 +1,6 @@
 package croki.api.domain.clients.dto;
 
-import croki.api.domain.address.AddressJPA;
+import croki.api.domain.address.Address;
 import croki.api.domain.clients.Client;
 
 public record ClientDetailingDTO(
@@ -10,7 +10,7 @@ public record ClientDetailingDTO(
         String company,
         String email,
         String phone,
-        AddressJPA address
+        Address address
 ) {
     public ClientDetailingDTO(Client client) {
         this(

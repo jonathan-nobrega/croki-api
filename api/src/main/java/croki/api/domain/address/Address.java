@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddressJPA {
+public class Address {
 
     private String line_1;
     private String line_2;
@@ -17,7 +17,7 @@ public class AddressJPA {
     private String state;
     private int zip;
 
-    public AddressJPA(AddressDTO data) {
+    public Address(AddressDTO data) {
 
         this.line_1 = data.line_1();
         this.line_2 = data.line_2();

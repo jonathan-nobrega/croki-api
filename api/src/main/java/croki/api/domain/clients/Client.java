@@ -1,6 +1,6 @@
 package croki.api.domain.clients;
 
-import croki.api.domain.address.AddressJPA;
+import croki.api.domain.address.Address;
 import croki.api.domain.clients.dto.CreateClientDTO;
 import croki.api.domain.clients.dto.UpdateClientDTO;
 import croki.api.domain.projects.Project;
@@ -31,7 +31,7 @@ public class Client {
     private String phone;
 
     @Embedded
-    private AddressJPA address;
+    private Address address;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Project> projects;
@@ -42,7 +42,7 @@ public class Client {
         this.company = data.company();
         this.email = data.email();
         this.phone = data.phone();
-        this.address = new AddressJPA(data.address());
+        this.address = new Address(data.address());
     }
 
     public void updateData(UpdateClientDTO data) {

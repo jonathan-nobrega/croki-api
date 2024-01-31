@@ -1,5 +1,4 @@
 CREATE TABLE invoices(
-
     id BIGINT NOT NULL AUTO_INCREMENT,
     project_id BIGINT NOT NULL,
     invoice_number INTEGER NOT NULL,

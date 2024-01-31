@@ -1,7 +1,7 @@
 package croki.api.controller;
 
+import croki.api.domain.address.Address;
 import croki.api.domain.address.AddressDTO;
-import croki.api.domain.address.AddressJPA;
 import croki.api.domain.clients.ClientRepository;
 import croki.api.domain.clients.dto.ClientDetailingDTO;
 import croki.api.domain.clients.dto.CreateClientDTO;
@@ -107,8 +107,8 @@ class ClientsControllerTest {
         );
     }
 
-    AddressJPA createRandomAddressObject() {
-        return new AddressJPA(
+    Address createRandomAddressObject() {
+        return new Address(
                 "line" + new Random() + "address example",
                 "line" + new Random() + "address example",
                 "city example",
