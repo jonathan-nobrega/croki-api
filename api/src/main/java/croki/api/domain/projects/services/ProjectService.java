@@ -1,7 +1,6 @@
 package croki.api.domain.projects.services;
 
-import croki.api.domain.clients.Client;
-import croki.api.domain.clients.ClientRepository;
+import croki.api.domain.clients.services.ClientService;
 import croki.api.domain.projects.Project;
 import croki.api.domain.projects.ProjectRepository;
 import croki.api.domain.projects.dto.CreateProjectDTO;
@@ -17,14 +16,14 @@ import org.springframework.stereotype.Service;
 public class ProjectService {
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     @Autowired
     private ProjectRepository projectRepository;
 
     @Transactional
     public ProjectDetailingDTO create(CreateProjectDTO data) {
-        var client = checkClient(data.clientId());
+        var client = clientService.checkClient(data.clientId());
         var newProject = new Project(client, data);
 
         projectRepository.save(newProject);
@@ -33,7 +32,7 @@ public class ProjectService {
 
     @Transactional
     public ProjectDetailingDTO update(UpdateProjectDTO data) {
-        var client = checkClient(data.clientId());
+        var client = clientService.checkClient(data.clientId());
         var project = projectRepository.getReferenceById(data.id());
 
         project.updateProject(client, data);
@@ -48,10 +47,10 @@ public class ProjectService {
         projectRepository.delete(projectRepository.getReferenceById(id));
     }
 
-    private Client checkClient(Long id) {
-        if (!clientRepository.existsById(id)) {
-            throw new ValidationException("Client doesn't exist.");
+    public Project checkProject(Long id) {
+        if (!projectRepository.existsById(id)) {
+            throw new ValidationException("Project doesn't exist");
         }
-        return clientRepository.getReferenceById(id);
+        return projectRepository.getReferenceById(id);
     }
 }
