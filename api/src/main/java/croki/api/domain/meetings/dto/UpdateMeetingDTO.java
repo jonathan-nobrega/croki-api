@@ -5,13 +5,13 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-public record CreateMeetingDTO(
+public record UpdateMeetingDTO(
         @NotNull
+        Long id,
         Long clientId,
-        @NotNull
         String description,
         String location,
-        @NotNull @FutureOrPresent
+        @FutureOrPresent
         LocalDateTime time
 ) {
 }
