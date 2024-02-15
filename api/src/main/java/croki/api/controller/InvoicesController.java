@@ -6,7 +6,6 @@ import croki.api.domain.invoices.dto.InvoiceDetailingDTO;
 import croki.api.domain.invoices.dto.UpdateInvoiceDTO;
 import croki.api.domain.invoices.services.InvoiceService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,7 +43,6 @@ public class InvoicesController {
     }
 
     @PostMapping
-    @Transactional
     public ResponseEntity<InvoiceDetailingDTO> create(@RequestBody @Valid CreateInvoiceDTO data, UriComponentsBuilder uriBuilder) {
         var newInvoice = invoiceService.create(data);
         var uri = uriBuilder.path("/invoices/{id}").buildAndExpand(newInvoice.id()).toUri();
@@ -53,14 +51,12 @@ public class InvoicesController {
     }
 
     @PutMapping
-    @Transactional
     public ResponseEntity<InvoiceDetailingDTO> update(@RequestBody @Valid UpdateInvoiceDTO data) {
         var invoice = invoiceService.update(data);
         return ResponseEntity.ok(invoice);
     }
 
     @DeleteMapping("/{id}")
-    @Transactional
     public ResponseEntity<ResponseEntity.BodyBuilder> delete(@PathVariable Long id) {
         invoiceService.delete(id);
         return ResponseEntity.noContent().build();

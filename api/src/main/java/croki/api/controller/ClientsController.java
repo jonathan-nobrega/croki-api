@@ -61,7 +61,6 @@ public class ClientsController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        System.out.println("Deleting Client ID " + id);
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
