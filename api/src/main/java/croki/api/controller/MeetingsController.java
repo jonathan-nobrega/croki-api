@@ -51,17 +51,17 @@ public class MeetingsController {
         return ResponseEntity.created(uri).body(newMeeting);
     }
 
-//    @PutMapping
-//    @Transactional
-//    public ResponseEntity<MeetingDetailingDTO> update(@RequestBody @Valid UpdateMeetingDTO data) {
-//        var meeting = meetingService.update(data);
-//        return ResponseEntity.ok(meeting);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    @Transactional
-//    public ResponseEntity<ResponseEntity.BodyBuilder> delete(@PathVariable Long id) {
-//        meetingService.delete(id);
-//        return ResponseEntity.noContent().build();
-//    }
+    @PutMapping
+    @Transactional
+    public ResponseEntity<MeetingDetailingDTO> update(@RequestBody @Valid UpdateMeetingDTO data) {
+        var meeting = meetingService.update(data);
+        return ResponseEntity.ok(meeting);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<ResponseEntity.BodyBuilder> delete(@PathVariable Long id) {
+        meetingService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

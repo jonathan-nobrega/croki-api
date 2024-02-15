@@ -2,6 +2,7 @@ package croki.api.domain.meetings;
 
 import croki.api.domain.clients.Client;
 import croki.api.domain.meetings.dto.CreateMeetingDTO;
+import croki.api.domain.meetings.dto.UpdateMeetingDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -35,5 +36,12 @@ public class Meeting {
         this.description = data.description();
         this.time = data.time();
         this.location = data.location();
+    }
+
+    public void updateMeeting(Client client, UpdateMeetingDTO data) {
+        if (client != null) this.client = client;
+        if (data.description() != null) this.description = data.description();
+        if (data.time() != null) this.time = data.time();
+        if (data.location() != null) this.location = data.location();
     }
 }

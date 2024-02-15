@@ -6,6 +6,7 @@ import croki.api.domain.meetings.MeetingsRepository;
 import croki.api.domain.meetings.dto.CreateMeetingDTO;
 import croki.api.domain.meetings.dto.MeetingDetailingDTO;
 import croki.api.domain.meetings.dto.UpdateMeetingDTO;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,9 +29,27 @@ public class MeetingService {
         return new MeetingDetailingDTO(newMeeting);
     }
 
-//    @Transactional
-//    public MeetingDetailingDTO update(UpdateMeetingDTO data) {
-//        var meeting = meetingsRepository.getReferenceById(data.id());
-//        var client = clientService.checkClient(meeting.getId());
-//    }
+    @Transactional
+    public MeetingDetailingDTO update(UpdateMeetingDTO data) {
+        var meeting = checkMeeting(data.id());
+        var client = data.clientId() != null ? clientService.checkClient(data.clientId()) : meeting.getClient();
+
+        meeting.updateMeeting(client, data);
+        return new MeetingDetailingDTO(meeting);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        if (!meetingsRepository.existsById(id)) {
+            throw new EntityNotFoundException("Meeting doesn't exist");
+        }
+        meetingsRepository.delete(meetingsRepository.getReferenceById(id));
+    }
+
+    public Meeting checkMeeting(Long id) {
+        if (!meetingsRepository.existsById(id)) {
+            throw new EntityNotFoundException("Meeting doesn't exist");
+        }
+        return meetingsRepository.getReferenceById(id);
+    }
 }
